@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.about.AboutFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Dastur Orifjon Olimjonov tomonidan\n ishlab chiqilgan" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

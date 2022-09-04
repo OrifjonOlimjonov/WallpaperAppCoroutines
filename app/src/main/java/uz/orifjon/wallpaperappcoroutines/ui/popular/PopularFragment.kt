@@ -40,7 +40,6 @@ class PopularFragment : Fragment(),CoroutineScope {
         launch {
             viewModel.flow.collect {
                 pagerAdapter.submitData(it)
-
             }
         }
         pagerAdapter = PhotoPaging3Adapter()
