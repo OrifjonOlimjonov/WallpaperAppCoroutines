@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentViewPagerBinding
 import kotlin.coroutines.CoroutineContext
@@ -42,7 +44,11 @@ class ViewPagerFragment : Fragment() ,CoroutineScope{
         viewPagerViewModelFactory = ViewPagerViewModelFactory(param1!!)
         viewPagerViewModel = ViewModelProvider(this,viewPagerViewModelFactory)[ViewPagerViewModel::class.java]
 
-        pagerAdapter = PhotoPaging3Adapter()
+        pagerAdapter = PhotoPaging3Adapter(){photo,i->
+            val bundle = Bundle()
+            bundle.putSerializable("photo",photo)
+            findNavController().navigate(R.id.viewPhotoFragment,bundle)
+        }
         binding.rv.adapter = pagerAdapter
 
         launch {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.AdapterRecyclerView
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentRandomBinding
@@ -66,7 +68,11 @@ class RandomFragment : Fragment(), CoroutineScope {
 
             }
         }
-        pagerAdapter = PhotoPaging3Adapter()
+        pagerAdapter = PhotoPaging3Adapter(){photo, i ->
+            val bundle = Bundle()
+            bundle.putSerializable("photo",photo)
+            findNavController().navigate(R.id.viewPhotoFragment,bundle)
+        }
 
         binding.rv.adapter = pagerAdapter
 

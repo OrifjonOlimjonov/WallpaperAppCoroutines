@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,7 +44,11 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         viewModelFactory = HomeViewModelFactory("water")
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
-        pagerAdapter = PhotoPaging3Adapter()
+        pagerAdapter = PhotoPaging3Adapter(){photo, i ->
+            val bundle = Bundle()
+            bundle.putSerializable("photo",photo)
+            findNavController().navigate(R.id.viewPhotoFragment,bundle)
+        }
         val list = arrayListOf("All", "News", "Nature", "Technology", "Animals")
         viewPager2Adapter = ViewPager2Adapter(lifecycle, childFragmentManager, list)
         binding.viewPager2.adapter = viewPager2Adapter

@@ -42,4 +42,8 @@
         android:name="uz.orifjon.wallpaperappcoroutines.ui.viewpager.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" />
+    <fragment
+        android:id="@+id/viewPhotoFragment"
+        android:name="uz.orifjon.wallpaperappcoroutines.ui.viewphoto.ViewPhotoFragment"
+        tools:layout="@layout/fragment_view_photo" />
 </navigation>

@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentPopularBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
@@ -36,7 +38,11 @@ class PopularFragment : Fragment(),CoroutineScope {
 
         viewModelFactory = PopularViewModelFactory("popular")
         viewModel = ViewModelProvider(this,viewModelFactory)[PopularViewModel::class.java]
-        pagerAdapter = PhotoPaging3Adapter()
+        pagerAdapter = PhotoPaging3Adapter(){photo, i ->
+            val bundle = Bundle()
+            bundle.putSerializable("photo",photo)
+            findNavController().navigate(R.id.viewPhotoFragment,bundle)
+        }
         launch {
             viewModel.flow.collect {
                 pagerAdapter.submitData(it)

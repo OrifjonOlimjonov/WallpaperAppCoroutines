@@ -2,6 +2,7 @@ package uz.orifjon.wallpaperappcoroutines.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 data class Photo(
     val alt: String,
@@ -15,4 +16,4 @@ data class Photo(
     val src: Src,
     val url: String,
     val width: Int
-)
+):Serializable

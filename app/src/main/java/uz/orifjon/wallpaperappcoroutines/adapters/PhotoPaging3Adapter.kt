@@ -12,7 +12,7 @@ import uz.orifjon.wallpaperappcoroutines.databinding.ItemRvBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
 import java.lang.Exception
 
-class PhotoPaging3Adapter:PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(MyDiffUtil()) {
+class PhotoPaging3Adapter(var itemClick:(Photo,Int)->Unit):PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(MyDiffUtil()) {
 
     class MyDiffUtil:DiffUtil.ItemCallback<Photo>(){
         override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
@@ -26,7 +26,7 @@ class PhotoPaging3Adapter:PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(My
     }
 
     inner class DataVH(var binding: ItemRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(photo: Photo){
+        fun onBind(photo: Photo,position: Int){
             binding.apply {
                 Picasso.get().load(photo.src.small).into(imgRV,object:com.squareup.picasso.Callback{
                     override fun onSuccess() {
@@ -39,6 +39,10 @@ class PhotoPaging3Adapter:PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(My
                     }
 
                 })
+                itemView.setOnClickListener {
+                    itemClick(photo,position)
+                }
+
             }
         }
     }
@@ -46,7 +50,7 @@ class PhotoPaging3Adapter:PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(My
     override fun onBindViewHolder(holder: DataVH, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.onBind(item)
+            holder.onBind(item,position)
         }
     }
 
