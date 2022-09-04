@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:bottom="@dimen/_8sdp" android:drawable="@drawable/ic_bottom_navigation_home_icon"/>
+    <item android:top="@dimen/_18sdp"
+        android:left="@dimen/_5sdp"
+        android:right="@dimen/_5sdp">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+</layer-list>

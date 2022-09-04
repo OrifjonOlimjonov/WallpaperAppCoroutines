@@ -18,6 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="@dimen/_250sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/item_bottomnavigation_backgroud_radius"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_height="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

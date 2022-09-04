@@ -3,7 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_bottom_navigation_home_icon.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_liked_white.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_popular_white.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_random_white.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/indicator.xml" value="0.1105" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_click.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_click_liked.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_click_popular.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_click_random.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_unclick.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_unclick_popular.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/item_bottom_navigation_unclick_random.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/popular.xml" value="0.1515" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/activity_main.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/app_bar_main.xml" value="0.2715477293790547" />
