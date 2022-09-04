@@ -23,8 +23,7 @@ class AboutFragment : Fragment() {
 
         viewModel.setList(binding.tv.text.toString())
 
-        viewModel.getList().observe(viewLifecycleOwner
-        ) {
+        viewModel.getList().observe(viewLifecycleOwner) {
             binding.tv.text = it
         }
 

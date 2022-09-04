@@ -10,7 +10,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/content_main.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_about.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_history.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_liked.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_popular.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_random.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/fragment_view_pager.xml" value="0.24010416666666667" />
@@ -19,6 +21,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/item_tab.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/layout/nav_header_main.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/menu/main.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

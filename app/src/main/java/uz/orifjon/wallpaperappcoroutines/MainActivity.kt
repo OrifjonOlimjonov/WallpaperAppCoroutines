@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         navView.itemIconTintList = null;
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home
+                R.id.nav_home,R.id.nav_popular,R.id.nav_random,R.id.nav_history,R.id.nav_about,R.id.nav_liked
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
