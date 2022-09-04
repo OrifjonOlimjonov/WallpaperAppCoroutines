@@ -36,14 +36,12 @@ class PopularFragment : Fragment(),CoroutineScope {
 
         viewModelFactory = PopularViewModelFactory("popular")
         viewModel = ViewModelProvider(this,viewModelFactory)[PopularViewModel::class.java]
-
+        pagerAdapter = PhotoPaging3Adapter()
         launch {
             viewModel.flow.collect {
                 pagerAdapter.submitData(it)
             }
         }
-        pagerAdapter = PhotoPaging3Adapter()
-
         binding.rv.adapter = pagerAdapter
 
         return root

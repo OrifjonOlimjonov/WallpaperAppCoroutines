@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/nav_liked"
         android:name="uz.orifjon.wallpaperappcoroutines.ui.liked.LikedFragment"
-        android:label="fragment_liked"
+        android:label="Liked"
         tools:layout="@layout/fragment_liked" />
     <fragment
         android:id="@+id/viewPagerFragment"
