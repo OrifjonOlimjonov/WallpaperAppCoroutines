@@ -1,5 +1,8 @@
 package uz.orifjon.wallpaperappcoroutines.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class Photo(
     val alt: String,
     val avg_color: String,
