@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentAboutBinding
 
@@ -17,7 +19,14 @@ class AboutFragment : Fragment() {
     ): View? {
         binding = FragmentAboutBinding.inflate(inflater,container,false)
 
+        val viewModel = ViewModelProvider(this)[AboutViewModel::class.java]
 
+        viewModel.setList(binding.tv.text.toString())
+
+        viewModel.getList().observe(viewLifecycleOwner
+        ) {
+            binding.tv.text = it
+        }
 
 
 
