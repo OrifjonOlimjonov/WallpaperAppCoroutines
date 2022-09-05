@@ -213,13 +213,6 @@
         app:tint="@color/white"
         app:backgroundTint="#474849" />
 
-
-    <SeekBar
-        android:id="@+id/seekbarFilter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/rvFilter"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFilter"
         android:visibility="invisible"

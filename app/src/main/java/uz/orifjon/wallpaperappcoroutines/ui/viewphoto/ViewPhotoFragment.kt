@@ -198,7 +198,7 @@ class ViewPhotoFragment : Fragment() {
         binding.btnBackFilter.setOnClickListener { view ->
             setVisibility()
             binding.rvFilter.visibility = View.INVISIBLE
-            binding.seekbarFilter.visibility = View.INVISIBLE
+           // binding.seekbarFilter.visibility = View.INVISIBLE
             binding.btnBackFilter.visibility = View.INVISIBLE
             binding.btnOKFilter.visibility = View.INVISIBLE
         }
@@ -380,12 +380,12 @@ class ViewPhotoFragment : Fragment() {
             //    val adapter = RecyclarViewFilterAdapter(listAdapter)
             //     binding.rvFilter.adapter = adapter
             binding.rvFilter.visibility = View.VISIBLE
-            binding.seekbarFilter.visibility = View.VISIBLE
+       //     binding.seekbarFilter.visibility = View.VISIBLE
         }
         binding.btnBackFilter.setOnClickListener { view ->
             setVisibility()
             binding.rvFilter.visibility = View.INVISIBLE
-            binding.seekbarFilter.visibility = View.INVISIBLE
+            //binding.seekbarFilter.visibility = View.INVISIBLE
             binding.btnBackFilter.visibility = View.INVISIBLE
             binding.btnOKFilter.visibility = View.INVISIBLE
             binding.imageView.setImageBitmap(originalImage)
