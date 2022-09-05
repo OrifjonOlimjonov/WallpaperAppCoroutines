@@ -22,7 +22,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import com.uvstudio.him.photofilterlibrary.PhotoFilter
 import uz.orifjon.wallpaperappcoroutines.R
+import uz.orifjon.wallpaperappcoroutines.adapters.AdapterRecyclerView
 import uz.orifjon.wallpaperappcoroutines.databinding.CustomDialogBinding
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentViewPhotoBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
@@ -44,6 +46,7 @@ class ViewPhotoFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentViewPhotoBinding
+    private lateinit var originalImage: Bitmap
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -51,11 +54,71 @@ class ViewPhotoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentViewPhotoBinding.inflate(inflater, container, false)
+        val photoFilter = PhotoFilter()
 
         val photo = requireArguments().getSerializable("photo") as Photo
         Picasso.get().load(photo.src.portrait).into(binding.imageView, object : Callback {
             override fun onSuccess() {
                 binding.progress.visibility = View.INVISIBLE
+                originalImage = (binding.imageView.drawable as BitmapDrawable).bitmap
+                binding.rvFilter.adapter =
+                    AdapterRecyclerView(requireContext(), resources, photo) { photo, position ->
+                        val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
+                        when (position) {
+                            0 -> {
+                               binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.one(context, bitmap))
+                            }
+                            1 ->{
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.two(context, bitmap))
+                            }
+                            2 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.three(context, bitmap))
+                            }
+                            3 ->{
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.four(context, bitmap))
+                            }
+                            4 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.five(context, bitmap))
+                            }
+                            5 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.six(context, bitmap))
+                            }
+                            6 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.seven(context, bitmap))
+                            }
+                            7 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.eight(context, bitmap))
+                            }
+                            8 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.nine(context, bitmap))
+                            }
+                            9 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.ten(context, bitmap))
+                            }
+                            10 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.eleven(context, bitmap))
+                            }
+                            11 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.twelve(context, bitmap))
+                            }
+                            12 -> {
+                                binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(photoFilter.thirteen(context, bitmap))
+                            }
+                        }
+                    }
             }
 
             override fun onError(e: Exception?) {
@@ -274,11 +337,6 @@ class ViewPhotoFragment : Fragment() {
 //            startActivity(Intent.createChooser(share, "Share Image"))
 
 
-
-
-
-
-
             val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
             shareImageandText(bitmap)
         }
@@ -330,6 +388,7 @@ class ViewPhotoFragment : Fragment() {
             binding.seekbarFilter.visibility = View.INVISIBLE
             binding.btnBackFilter.visibility = View.INVISIBLE
             binding.btnOKFilter.visibility = View.INVISIBLE
+            binding.imageView.setImageBitmap(originalImage)
         }
 
 
@@ -370,7 +429,8 @@ class ViewPhotoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        val viewById = requireActivity().findViewById<BottomNavigationView>(uz.orifjon.wallpaperappcoroutines.R.id.bottomNavigation)
+        val viewById =
+            requireActivity().findViewById<BottomNavigationView>(uz.orifjon.wallpaperappcoroutines.R.id.bottomNavigation)
         viewById.visibility = View.VISIBLE
         //binding.progress.visibility = View.VISIBLE
     }
@@ -392,7 +452,7 @@ class ViewPhotoFragment : Fragment() {
     }
 
     private fun getmageToShare(bitmap: Bitmap): Uri? {
-        val imageFolder: File = File( "images")
+        val imageFolder: File = File("images")
         var uri: Uri? = null
         try {
             imageFolder.mkdirs()
@@ -401,9 +461,13 @@ class ViewPhotoFragment : Fragment() {
             bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream)
             outputStream.flush()
             outputStream.close()
-            uri = FileProvider.getUriForFile(requireContext(), "com.anni.shareimage.fileprovider", file)
+            uri = FileProvider.getUriForFile(
+                requireContext(),
+                "com.anni.shareimage.fileprovider",
+                file
+            )
         } catch (e: java.lang.Exception) {
-           // Toast.makeText(this, "" + e.message, Toast.LENGTH_LONG).show()
+            // Toast.makeText(this, "" + e.message, Toast.LENGTH_LONG).show()
         }
         return uri
     }
