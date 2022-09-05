@@ -16,4 +16,4 @@ data class Photo(
     val src: Src,
     val url: String,
     val width: Int
-):Serializable
+):Serializable 

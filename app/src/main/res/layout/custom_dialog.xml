@@ -17,6 +17,7 @@
             android:paddingBottom="@dimen/_10sdp" >
 
             <TextView
+                android:id="@+id/tvAverageColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -25,24 +26,25 @@
                 android:textSize="@dimen/_16ssp" />
 
             <TextView
+                android:id="@+id/tvTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:text="Author: Anton Makareno"
                 android:textSize="@dimen/_16ssp"
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/tvImagePhotograph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="@dimen/_16ssp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:text="Download: 1234441"
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/tvImageSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"

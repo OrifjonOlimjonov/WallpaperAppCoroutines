@@ -6,11 +6,16 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -39,6 +44,8 @@ class ViewPhotoFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentViewPhotoBinding
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,11 +79,48 @@ class ViewPhotoFragment : Fragment() {
             binding.btnDesktopBack.visibility = View.VISIBLE
             binding.btnDesktop.setOnClickListener { view1 ->
                 try {
-
                     val wallpaperManager = WallpaperManager.getInstance(requireContext())
                     val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
-                    wallpaperManager.setBitmap(bitmap)
-                    Toast.makeText(requireContext(), "Set background image!", Toast.LENGTH_SHORT)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        wallpaperManager.setBitmap(
+                            bitmap,
+                            null,
+                            false,
+                            WallpaperManager.FLAG_SYSTEM
+                        )
+                    }
+                    Toast.makeText(requireContext(), "Set home screen image!", Toast.LENGTH_SHORT)
+                        .show()
+                    //TODO : Ekranga set qilishni yozish kerak
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            binding.btnBlock.setOnClickListener {
+                try {
+                    val wallpaperManager = WallpaperManager.getInstance(requireContext())
+                    val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        wallpaperManager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_LOCK)
+                    }
+                    Toast.makeText(requireContext(), "Set lock screen image!", Toast.LENGTH_SHORT)
+                        .show()
+                    //TODO : Ekranga set qilishni yozish kerak
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            binding.btnBoth.setOnClickListener {
+                try {
+                    val wallpaperManager = WallpaperManager.getInstance(requireContext())
+                    val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        wallpaperManager.setBitmap(
+                            bitmap, null, false,
+                            WallpaperManager.FLAG_LOCK or WallpaperManager.FLAG_SYSTEM
+                        )
+                    }
+                    Toast.makeText(requireContext(), "Set both screen image!", Toast.LENGTH_SHORT)
                         .show()
                     //TODO : Ekranga set qilishni yozish kerak
                 } catch (e: IOException) {
@@ -84,6 +128,7 @@ class ViewPhotoFragment : Fragment() {
                 }
             }
         }
+
 
 
 
@@ -107,6 +152,10 @@ class ViewPhotoFragment : Fragment() {
             binding.btnLike.visibility = View.INVISIBLE
             val bottomSheetDialog = BottomSheetDialog(requireContext())
             val binding: CustomDialogBinding = CustomDialogBinding.inflate(layoutInflater)
+            binding.tvAverageColor.text = "Average Color: ${photo.avg_color}"
+            binding.tvTheme.text = "Theme: ${photo.alt}"
+            binding.tvImagePhotograph.text = "Photograph: ${photo.photographer}"
+            binding.tvImageSize.text = "Size: ${photo.width}x${photo.height}"
             bottomSheetDialog.setContentView(binding.root)
             bottomSheetDialog.setCancelable(true)
             bottomSheetDialog.show()
@@ -175,34 +224,63 @@ class ViewPhotoFragment : Fragment() {
 
 
         binding.btnShare.setOnClickListener {
-            val myIntent = Intent(Intent.ACTION_SEND)
-            myIntent.type = "text/plain"
-            myIntent.type = "image/jpeg"
-            myIntent.type = "audio/mpeg4-generic"
-            myIntent.type = "text/html"
-            myIntent.type = "audio/mpeg"
-            myIntent.type = "audio/aac"
-            myIntent.type = "audio/wav"
-            myIntent.type = "audio/ogg"
-            myIntent.type = "audio/midi"
-            myIntent.type = "audio/x-ms-wma"
-            myIntent.type = "video/mp4"
-            myIntent.type = "video/x-msvideo"
-            myIntent.type = "video/x-ms-wmv"
-            myIntent.type = "image/png"
-            myIntent.type = "image/jpeg"
-            myIntent.type = "image/gif"
-            myIntent.type = "text/xml"
-            myIntent.type = "text/plain"
-            myIntent.type = ".cfg -> text/plain"
-            myIntent.type = ".csv -> text/plain"
-            myIntent.type = ".conf -> text/plain"
-            myIntent.type = ".rc -> text/plain"
-            myIntent.type = ".htm -> text/html"
-            myIntent.type = ".html -> text/html"
-            myIntent.type = ".pdf -> application/pdf"
-            // myIntent.putExtra(Intent.EXTRA_SUBJECT,  )
-            startActivity(Intent.createChooser(myIntent, "Share Using"))
+//            val myIntent = Intent(Intent.ACTION_SEND)
+//            myIntent.type = "text/plain"
+//            myIntent.type = "audio/mpeg4-generic"
+//            myIntent.type = "text/html"
+//            myIntent.type = "audio/mpeg"
+//            myIntent.type = "audio/aac"
+//            myIntent.type = "audio/wav"
+//            myIntent.type = "audio/ogg"
+//            myIntent.type = "audio/midi"
+//            myIntent.type = "audio/x-ms-wma"
+//            myIntent.type = "video/mp4"
+//            myIntent.type = "video/x-msvideo"
+//            myIntent.type = "video/x-ms-wmv"
+//            myIntent.type = "image/png"
+//            myIntent.type = "image/jpeg"
+//            myIntent.type = "image/gif"
+//            myIntent.type = "text/xml"
+//            myIntent.type = "text/plain"
+//            myIntent.type = ".cfg -> text/plain"
+//            myIntent.type = ".csv -> text/plain"
+//            myIntent.type = ".conf -> text/plain"
+//            myIntent.type = ".rc -> text/plain"
+//            myIntent.type = ".htm -> text/html"
+//            myIntent.type = ".html -> text/html"
+//            myIntent.type = ".pdf -> application/pdf"
+//             myIntent.putExtra(Intent.EXTRA_SUBJECT, photo )
+//            startActivity(Intent.createChooser(myIntent, "Share Using"))
+
+//            val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
+//            val icon: Bitmap = bitmap
+//            val share = Intent(Intent.ACTION_SEND)
+//            share.type = "image/jpeg"
+//            val bytes = ByteArrayOutputStream()
+//            icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+//            val f = File(
+//                Environment.getExternalStorageDirectory()
+//                    .toString() + File.separator + "temporary_file.jpg"
+//            )
+//            try {
+//                f.createNewFile()
+//                val fo = FileOutputStream(f)
+//                fo.write(bytes.toByteArray())
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//
+//
+//            startActivity(Intent.createChooser(share, "Share Image"))
+
+
+
+
+
+
+
+            val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
+            shareImageandText(bitmap)
         }
 
 
@@ -237,12 +315,12 @@ class ViewPhotoFragment : Fragment() {
 
 
         binding.btnFilter.setOnClickListener { view ->
-          //  loadList()
+            //  loadList()
             setInvisibility()
             binding.btnOKFilter.visibility = View.VISIBLE
             binding.btnBackFilter.visibility = View.VISIBLE
-        //    val adapter = RecyclarViewFilterAdapter(listAdapter)
-       //     binding.rvFilter.adapter = adapter
+            //    val adapter = RecyclarViewFilterAdapter(listAdapter)
+            //     binding.rvFilter.adapter = adapter
             binding.rvFilter.visibility = View.VISIBLE
             binding.seekbarFilter.visibility = View.VISIBLE
         }
@@ -253,8 +331,6 @@ class ViewPhotoFragment : Fragment() {
             binding.btnBackFilter.visibility = View.INVISIBLE
             binding.btnOKFilter.visibility = View.INVISIBLE
         }
-
-
 
 
 
@@ -294,9 +370,42 @@ class ViewPhotoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById = requireActivity().findViewById<BottomNavigationView>(uz.orifjon.wallpaperappcoroutines.R.id.bottomNavigation)
         viewById.visibility = View.VISIBLE
         //binding.progress.visibility = View.VISIBLE
+    }
+
+
+    private fun shareImageandText(bitmap: Bitmap) {
+        val uri = getmageToShare(bitmap)
+        val intent = Intent(Intent.ACTION_SEND)
+
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
+
+        intent.putExtra(Intent.EXTRA_TEXT, "Sharing Image")
+
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+
+        intent.type = "image/png"
+
+        startActivity(Intent.createChooser(intent, "Share Via"))
+    }
+
+    private fun getmageToShare(bitmap: Bitmap): Uri? {
+        val imageFolder: File = File( "images")
+        var uri: Uri? = null
+        try {
+            imageFolder.mkdirs()
+            val file = File(imageFolder, "shared_image.png")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream)
+            outputStream.flush()
+            outputStream.close()
+            uri = FileProvider.getUriForFile(requireContext(), "com.anni.shareimage.fileprovider", file)
+        } catch (e: java.lang.Exception) {
+           // Toast.makeText(this, "" + e.message, Toast.LENGTH_LONG).show()
+        }
+        return uri
     }
 
 }
