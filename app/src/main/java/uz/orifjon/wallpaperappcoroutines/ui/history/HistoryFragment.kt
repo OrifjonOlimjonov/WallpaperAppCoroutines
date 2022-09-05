@@ -30,6 +30,8 @@ class HistoryFragment : Fragment() {
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         viewById.visibility = View.INVISIBLE
 
+
+
         return binding.root
     }
 
