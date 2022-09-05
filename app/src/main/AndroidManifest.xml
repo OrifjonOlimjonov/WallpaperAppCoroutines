@@ -31,12 +31,12 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.anni.shareimage.fileprovider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths" />
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

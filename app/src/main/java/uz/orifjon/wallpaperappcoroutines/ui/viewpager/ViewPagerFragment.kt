@@ -46,7 +46,7 @@ class ViewPagerFragment : Fragment() ,CoroutineScope{
 
         pagerAdapter = PhotoPaging3Adapter(){photo,i->
             val bundle = Bundle()
-            bundle.putSerializable("photo",photo)
+            bundle.putParcelable("photo",photo)
             findNavController().navigate(R.id.viewPhotoFragment,bundle)
         }
         binding.rv.adapter = pagerAdapter

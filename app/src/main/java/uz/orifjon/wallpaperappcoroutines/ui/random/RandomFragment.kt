@@ -13,6 +13,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -37,6 +38,7 @@ class RandomFragment : Fragment(), CoroutineScope {
     private lateinit var list: ArrayList<Photo>
     private lateinit var pagerAdapter: PhotoPaging3Adapter
     private val TAG = "RandomFragment"
+    private lateinit var job:Job
     private lateinit var viewModel: RandomViewModel
     private lateinit var viewModelFactory: RandomViewModelFactory
     override fun onCreateView(
@@ -46,7 +48,7 @@ class RandomFragment : Fragment(), CoroutineScope {
     ): View {
         _binding = FragmentRandomBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        job = Job()
 
 //        list = ArrayList()
         // adapter = AdapterRecyclerView(list)
@@ -65,12 +67,11 @@ class RandomFragment : Fragment(), CoroutineScope {
         launch {
             viewModel.flow.collect {
                 pagerAdapter.submitData(it)
-
             }
         }
         pagerAdapter = PhotoPaging3Adapter(){photo, i ->
             val bundle = Bundle()
-            bundle.putSerializable("photo",photo)
+            bundle.putParcelable("photo",photo)
             findNavController().navigate(R.id.viewPhotoFragment,bundle)
         }
 
@@ -83,8 +84,11 @@ class RandomFragment : Fragment(), CoroutineScope {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        job.cancel()
     }
 
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
+        get() = Dispatchers.Main + job
+
+
 }

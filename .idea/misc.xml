@@ -6,6 +6,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/bottomsheet_radius.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/close.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/dislike.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_both.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_bottom_navigation_home_icon.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/drawable/ic_info.xml" value="0.1695" />
@@ -47,6 +48,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/menu/main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/menu/menubottom.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/WallpaperappCoroutines/app/src/main/res/xml/provider_paths.xml" value="0.253125" />
       </map>
     </option>
   </component>

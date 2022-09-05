@@ -46,7 +46,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         pagerAdapter = PhotoPaging3Adapter(){photo, i ->
             val bundle = Bundle()
-            bundle.putSerializable("photo",photo)
+            bundle.putParcelable("photo",photo)
             findNavController().navigate(R.id.viewPhotoFragment,bundle)
         }
         val list = arrayListOf("All", "News", "Nature", "Technology", "Animals")

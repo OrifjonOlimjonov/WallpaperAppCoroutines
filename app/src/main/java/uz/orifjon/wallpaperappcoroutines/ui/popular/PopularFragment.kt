@@ -40,7 +40,7 @@ class PopularFragment : Fragment(),CoroutineScope {
         viewModel = ViewModelProvider(this,viewModelFactory)[PopularViewModel::class.java]
         pagerAdapter = PhotoPaging3Adapter(){photo, i ->
             val bundle = Bundle()
-            bundle.putSerializable("photo",photo)
+            bundle.putParcelable("photo",photo)
             findNavController().navigate(R.id.viewPhotoFragment,bundle)
         }
         launch {

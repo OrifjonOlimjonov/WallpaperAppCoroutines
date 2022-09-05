@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,7 @@ class ViewPhotoFragment : Fragment() {
         binding = FragmentViewPhotoBinding.inflate(inflater, container, false)
         val photoFilter = PhotoFilter()
 
-        val photo = requireArguments().getSerializable("photo") as Photo
+        val photo = requireArguments().getParcelable<Photo>("photo")!!
         Picasso.get().load(photo.src.portrait).into(binding.imageView, object : Callback {
             override fun onSuccess() {
                 binding.progress.visibility = View.INVISIBLE
@@ -66,10 +67,10 @@ class ViewPhotoFragment : Fragment() {
                         val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
                         when (position) {
                             0 -> {
-                               binding.imageView.setImageBitmap(originalImage)
+                                binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.one(context, bitmap))
                             }
-                            1 ->{
+                            1 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.two(context, bitmap))
                             }
@@ -77,7 +78,7 @@ class ViewPhotoFragment : Fragment() {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.three(context, bitmap))
                             }
-                            3 ->{
+                            3 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.four(context, bitmap))
                             }
@@ -107,15 +108,30 @@ class ViewPhotoFragment : Fragment() {
                             }
                             10 -> {
                                 binding.imageView.setImageBitmap(originalImage)
-                                binding.imageView.setImageBitmap(photoFilter.eleven(context, bitmap))
+                                binding.imageView.setImageBitmap(
+                                    photoFilter.eleven(
+                                        context,
+                                        bitmap
+                                    )
+                                )
                             }
                             11 -> {
                                 binding.imageView.setImageBitmap(originalImage)
-                                binding.imageView.setImageBitmap(photoFilter.twelve(context, bitmap))
+                                binding.imageView.setImageBitmap(
+                                    photoFilter.twelve(
+                                        context,
+                                        bitmap
+                                    )
+                                )
                             }
                             12 -> {
                                 binding.imageView.setImageBitmap(originalImage)
-                                binding.imageView.setImageBitmap(photoFilter.thirteen(context, bitmap))
+                                binding.imageView.setImageBitmap(
+                                    photoFilter.thirteen(
+                                        context,
+                                        bitmap
+                                    )
+                                )
                             }
                         }
                     }
@@ -198,7 +214,7 @@ class ViewPhotoFragment : Fragment() {
         binding.btnBackFilter.setOnClickListener { view ->
             setVisibility()
             binding.rvFilter.visibility = View.INVISIBLE
-           // binding.seekbarFilter.visibility = View.INVISIBLE
+            // binding.seekbarFilter.visibility = View.INVISIBLE
             binding.btnBackFilter.visibility = View.INVISIBLE
             binding.btnOKFilter.visibility = View.INVISIBLE
         }
@@ -234,7 +250,6 @@ class ViewPhotoFragment : Fragment() {
 //            alertDialog1.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 //            alertDialog1.show()
         }
-
 
 
 
@@ -315,6 +330,7 @@ class ViewPhotoFragment : Fragment() {
 //             myIntent.putExtra(Intent.EXTRA_SUBJECT, photo )
 //            startActivity(Intent.createChooser(myIntent, "Share Using"))
 
+
 //            val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
 //            val icon: Bitmap = bitmap
 //            val share = Intent(Intent.ACTION_SEND)
@@ -335,10 +351,15 @@ class ViewPhotoFragment : Fragment() {
 //
 //
 //            startActivity(Intent.createChooser(share, "Share Image"))
-
-
             val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
-            shareImageandText(bitmap)
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "image/*"
+            val bmpUri = saveImage(bitmap, requireContext())
+            share.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            share.putExtra(Intent.EXTRA_STREAM, bmpUri)
+            share.putExtra(Intent.EXTRA_SUBJECT, "New App")
+            share.putExtra(Intent.EXTRA_TEXT, "Rasm bu")
+            startActivity(Intent.createChooser(share, "Share content"))
         }
 
 
@@ -380,7 +401,7 @@ class ViewPhotoFragment : Fragment() {
             //    val adapter = RecyclarViewFilterAdapter(listAdapter)
             //     binding.rvFilter.adapter = adapter
             binding.rvFilter.visibility = View.VISIBLE
-       //     binding.seekbarFilter.visibility = View.VISIBLE
+            //     binding.seekbarFilter.visibility = View.VISIBLE
         }
         binding.btnBackFilter.setOnClickListener { view ->
             setVisibility()
@@ -392,7 +413,12 @@ class ViewPhotoFragment : Fragment() {
         }
 
 
-
+        binding.btnOKFilter.setOnClickListener {
+            setVisibility()
+            binding.rvFilter.visibility = View.INVISIBLE
+            binding.btnBackFilter.visibility = View.INVISIBLE
+            binding.btnOKFilter.visibility = View.INVISIBLE
+        }
 
 
 
@@ -402,6 +428,32 @@ class ViewPhotoFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun saveImage(bitmap: Bitmap?, requireContext: Context): Uri? {
+        val imagesFolder = File(requireContext.cacheDir, "images")
+        var uri: Uri? = null
+        try {
+            imagesFolder.mkdirs()
+            val file = File(imagesFolder, "shared_images.jpg")
+            val fileOutputStream = FileOutputStream(file)
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream)
+            fileOutputStream.flush()
+            fileOutputStream.close()
+            uri = Objects.requireNonNull(
+                context?.applicationContext
+            )?.let {
+                FileProvider.getUriForFile(
+                    it,
+                    "uz.orifjon.wallpaperappcoroutines" + ".provider",
+                    file
+                )
+            }
+
+        } catch (e:Exception){
+            Log.d("TAG", "saveImage: $e")
+        }
+        return uri
     }
 
     private fun setVisibility() {
@@ -446,13 +498,13 @@ class ViewPhotoFragment : Fragment() {
 
         intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
 
-        intent.type = "image/png"
+        intent.type = "image/*"
 
         startActivity(Intent.createChooser(intent, "Share Via"))
     }
 
     private fun getmageToShare(bitmap: Bitmap): Uri? {
-        val imageFolder: File = File("images")
+        val imageFolder = File("images")
         var uri: Uri? = null
         try {
             imageFolder.mkdirs()
