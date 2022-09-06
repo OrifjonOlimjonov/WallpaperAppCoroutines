@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
@@ -19,18 +19,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
+        android:id="@+id/blur"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        app:blk_cornerRadius="@dimen/_100sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="@dimen/_250sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:elevation="0dp"
-            app:menu="@menu/menubottom"
-            app:labelVisibilityMode="unlabeled"
-            android:background="@drawable/item_bottomnavigation_backgroud_radius"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="@dimen/_30sdp"
             android:layout_height="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:background="@drawable/item_bottomnavigation_backgroud_radius"
+            app:elevation="0dp"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
-          />
-
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/menubottom" />
+    </uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

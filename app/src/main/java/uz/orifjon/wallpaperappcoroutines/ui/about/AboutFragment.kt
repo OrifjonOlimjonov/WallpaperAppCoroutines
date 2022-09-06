@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import uz.orifjon.wallpaperappcoroutines.R
+import uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
@@ -19,7 +20,9 @@ class AboutFragment : Fragment() {
         super.onAttach(context)
        // (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.INVISIBLE
+        viewById1.visibility = View.INVISIBLE
     }
 
     private lateinit var binding:FragmentAboutBinding
@@ -52,7 +55,9 @@ class AboutFragment : Fragment() {
         super.onDestroy()
         //(activity as AppCompatActivity?)!!.supportActionBar!!.show()
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.VISIBLE
+        viewById1.visibility = View.VISIBLE
     }
 
 }

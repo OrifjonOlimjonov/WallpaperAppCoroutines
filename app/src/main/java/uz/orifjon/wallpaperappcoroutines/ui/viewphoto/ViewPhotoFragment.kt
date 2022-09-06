@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso
 import com.uvstudio.him.photofilterlibrary.PhotoFilter
 import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.AdapterRecyclerView
+import uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
 import uz.orifjon.wallpaperappcoroutines.databinding.CustomDialogBinding
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentViewPhotoBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
@@ -43,7 +44,9 @@ class ViewPhotoFragment : Fragment() {
 
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.INVISIBLE
+        viewById1.visibility = View.INVISIBLE
     }
 
     private lateinit var binding: FragmentViewPhotoBinding
@@ -481,9 +484,10 @@ class ViewPhotoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        val viewById =
-            requireActivity().findViewById<BottomNavigationView>(uz.orifjon.wallpaperappcoroutines.R.id.bottomNavigation)
+        val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.VISIBLE
+        viewById1.visibility = View.VISIBLE
         //binding.progress.visibility = View.VISIBLE
     }
 

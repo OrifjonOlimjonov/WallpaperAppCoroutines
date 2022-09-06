@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import uz.orifjon.wallpaperappcoroutines.R
+import uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -17,7 +18,9 @@ class HistoryFragment : Fragment() {
         super.onAttach(context)
       //  (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.INVISIBLE
+        viewById1.visibility = View.INVISIBLE
     }
 
     private lateinit var binding:FragmentHistoryBinding
@@ -44,6 +47,8 @@ class HistoryFragment : Fragment() {
         super.onDestroy()
      //   (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         val viewById = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val viewById1 = requireActivity().findViewById<BlurLayout>(R.id.blur)
         viewById.visibility = View.VISIBLE
+        viewById1.visibility = View.VISIBLE
     }
 }
