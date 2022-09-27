@@ -1,6 +1,7 @@
 package uz.orifjon.wallpaperappcoroutines.ui.viewphoto
 
 import android.app.WallpaperManager
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -260,25 +262,7 @@ class ViewPhotoFragment : Fragment() {
 
 
         binding.btnDownload.setOnClickListener { view ->
-            val image: Drawable = binding.imageView.drawable
-            if (image is BitmapDrawable) {
-                val drawable = image as BitmapDrawable
-                val bitmap = drawable.bitmap
-                try {
-                    val file =
-                        File(File.pathSeparator.lowercase(Locale.getDefault()))
-                    val stream = FileOutputStream(file)
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                    stream.flush()
-                    stream.close()
-                } catch (e: java.lang.Exception) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Not save, path address error entered!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+            saveToStorage()
         }
 
 
@@ -457,6 +441,34 @@ class ViewPhotoFragment : Fragment() {
             Log.d("TAG", "saveImage: $e")
         }
         return uri
+    }
+    private fun saveToStorage() {
+        var contentResolver = requireActivity().contentResolver
+        val images = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+        val contentValues = ContentValues()
+        contentValues.put(
+            MediaStore.Images.Media.DISPLAY_NAME,
+            "image.jpg"
+        )
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "images/*")
+        val uri = contentResolver.insert(images, contentValues)
+
+        try {
+            val bitmapDrawable = binding.imageView.drawable as BitmapDrawable
+            val bitmap = bitmapDrawable.bitmap
+
+            val outputStream = Objects.requireNonNull(uri)
+                ?.let { contentResolver.openOutputStream(it) }
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            Objects.requireNonNull(outputStream)
+            Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Failed to save image", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setVisibility() {
