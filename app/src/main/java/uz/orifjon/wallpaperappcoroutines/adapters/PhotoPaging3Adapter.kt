@@ -7,12 +7,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import retrofit2.Callback
 import uz.orifjon.wallpaperappcoroutines.databinding.ItemRvBinding
-import uz.orifjon.wallpaperappcoroutines.models.Photo
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
 import java.lang.Exception
 
-class PhotoPaging3Adapter(var itemClick:(Photo,Int)->Unit):PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(MyDiffUtil()) {
+class PhotoPaging3Adapter(var itemClick:(Photo, Int)->Unit):PagingDataAdapter<Photo,PhotoPaging3Adapter.DataVH>(MyDiffUtil()) {
 
     class MyDiffUtil:DiffUtil.ItemCallback<Photo>(){
         override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
@@ -26,7 +25,7 @@ class PhotoPaging3Adapter(var itemClick:(Photo,Int)->Unit):PagingDataAdapter<Pho
     }
 
     inner class DataVH(var binding: ItemRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(photo: Photo,position: Int){
+        fun onBind(photo: Photo, position: Int){
             binding.apply {
                 Picasso.get().load(photo.src.small).into(imgRV,object:com.squareup.picasso.Callback{
                     override fun onSuccess() {

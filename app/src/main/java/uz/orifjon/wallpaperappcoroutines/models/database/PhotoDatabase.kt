@@ -1,11 +1,13 @@
-package uz.orifjon.wallpaperappcoroutines.models
+package uz.orifjon.wallpaperappcoroutines.models.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 @Database(entities = [Photo::class], version = 1, exportSchema = false)
+@TypeConverters(SrcConverter::class)
 abstract class PhotoDatabase : RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao
@@ -14,7 +16,7 @@ abstract class PhotoDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: PhotoDatabase? = null
 
-        fun getDatabase(context: Context):PhotoDatabase{
+        fun getDatabase(context: Context): PhotoDatabase {
             val tempInstance = INSTANCE
             if(tempInstance != null){
                 return tempInstance

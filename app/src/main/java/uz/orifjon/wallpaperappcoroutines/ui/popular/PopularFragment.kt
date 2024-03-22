@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,9 +13,6 @@ import kotlinx.coroutines.launch
 import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentPopularBinding
-import uz.orifjon.wallpaperappcoroutines.models.Photo
-import uz.orifjon.wallpaperappcoroutines.ui.random.RandomViewModel
-import uz.orifjon.wallpaperappcoroutines.ui.random.RandomViewModelFactory
 import kotlin.coroutines.CoroutineContext
 
 class PopularFragment : Fragment(),CoroutineScope {

@@ -2,24 +2,19 @@ package uz.orifjon.wallpaperappcoroutines.adapters
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.uvstudio.him.photofilterlibrary.PhotoFilter
-import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.databinding.ItemRvBinding
-import uz.orifjon.wallpaperappcoroutines.models.Photo
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
 import java.lang.Exception
-import kotlin.coroutines.coroutineContext
 
-class AdapterRecyclerView(var context: Context, var resources: Resources, var photo:Photo,var itemClick:(Photo,Int)->Unit) :
+class AdapterRecyclerView(var context: Context, var resources: Resources, var photo: Photo, var itemClick:(Photo, Int)->Unit) :
     RecyclerView.Adapter<AdapterRecyclerView.VH>() {
 
     inner class VH(var binding: ItemRvBinding) : RecyclerView.ViewHolder(binding.root) {

@@ -30,10 +30,8 @@ import uz.orifjon.wallpaperappcoroutines.adapters.AdapterRecyclerView
 import uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
 import uz.orifjon.wallpaperappcoroutines.databinding.CustomDialogBinding
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentViewPhotoBinding
-import uz.orifjon.wallpaperappcoroutines.models.Photo
-import uz.orifjon.wallpaperappcoroutines.models.PhotoDatabase
-import uz.orifjon.wallpaperappcoroutines.retrofit.ApiClient
-import uz.orifjon.wallpaperappcoroutines.retrofit.ApiService
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
+import uz.orifjon.wallpaperappcoroutines.models.database.PhotoDatabase
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -65,6 +63,11 @@ class ViewPhotoFragment : Fragment() {
         val photoFilter = PhotoFilter()
 
         val photo = requireArguments().getParcelable<Photo>("photo")!!
+        if (PhotoDatabase.getDatabase(requireContext()).photoDao().getImage(photo.id) != null) {
+            binding.btnLike.setBackgroundResource(R.drawable.liked)
+        } else{
+            binding.btnLike.setBackgroundResource(R.drawable.dislike)
+        }
         Picasso.get().load(photo.src.portrait).into(binding.imageView, object : Callback {
             override fun onSuccess() {
                 binding.progress.visibility = View.INVISIBLE
@@ -375,22 +378,11 @@ class ViewPhotoFragment : Fragment() {
         binding.btnLike.setOnClickListener { view ->
             if (PhotoDatabase.getDatabase(requireContext()).photoDao().getImage(photo.id) == null) {
                 PhotoDatabase.getDatabase(requireContext()).photoDao().add(photo)
+                binding.btnLike.setBackgroundResource(R.drawable.liked)
             } else{
                 PhotoDatabase.getDatabase(requireContext()).photoDao().delete(photo)
+                binding.btnLike.setBackgroundResource(R.drawable.dislike)
             }
-//            if (list.get(i).isLike()) {
-//                binding.btnLike.setBackgroundResource(R.drawable.dislike)
-//            } else {
-//                binding.btnLike.setBackgroundResource(R.drawable.like)
-//            }
-//
-//            if (k) {
-//                list.add(Like(img.getImage(), true))
-//                binding.btnLike.setBackgroundResource(R.drawable.like)
-//            } else {
-//                list.removeAt(index)
-//            }
-
         }
 
 
@@ -433,6 +425,8 @@ class ViewPhotoFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     private fun saveImage(bitmap: Bitmap?, requireContext: Context): Uri? {
         val imagesFolder = File(requireContext.cacheDir, "images")

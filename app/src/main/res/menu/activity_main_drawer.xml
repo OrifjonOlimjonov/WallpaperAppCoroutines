@@ -21,10 +21,6 @@
             android:icon="@drawable/like"
             android:title="Liked" />
         <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/history"
-            android:title="History" />
-        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/about"
             android:title="About" />

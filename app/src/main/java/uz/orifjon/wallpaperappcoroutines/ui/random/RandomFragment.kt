@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import uz.orifjon.wallpaperappcoroutines.R
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentRandomBinding
-import uz.orifjon.wallpaperappcoroutines.models.Photo
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
 import kotlin.coroutines.CoroutineContext
 
 class RandomFragment : Fragment(), CoroutineScope {

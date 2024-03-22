@@ -1,5 +1,7 @@
 package uz.orifjon.wallpaperappcoroutines.models
 
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
+
 data class PhotosApi(
     val next_page: String,
     val page: Int,

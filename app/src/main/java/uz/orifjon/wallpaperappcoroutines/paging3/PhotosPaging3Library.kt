@@ -1,9 +1,8 @@
 package uz.orifjon.wallpaperappcoroutines.paging3
 
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import uz.orifjon.wallpaperappcoroutines.models.Photo
+import uz.orifjon.wallpaperappcoroutines.models.database.Photo
 import uz.orifjon.wallpaperappcoroutines.retrofit.ApiClient
 import uz.orifjon.wallpaperappcoroutines.retrofit.ApiService
 import java.lang.Exception

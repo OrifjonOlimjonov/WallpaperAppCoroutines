@@ -1,4 +1,4 @@
-package uz.orifjon.wallpaperappcoroutines.models
+package uz.orifjon.wallpaperappcoroutines.models.database
 
 import androidx.room.*
 
@@ -16,7 +16,7 @@ interface PhotoDao {
     fun delete(photo: Photo)
 
     @Query("SELECT * FROM Photo where id = :id")
-    fun getImage(id:Int):Photo?
+    fun getImage(id:Int): Photo?
 
     @Query("SELECT * FROM Photo")
     fun list():List<Photo>

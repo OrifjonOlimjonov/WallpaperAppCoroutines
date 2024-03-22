@@ -1,12 +1,10 @@
-package uz.orifjon.wallpaperappcoroutines.models
+package uz.orifjon.wallpaperappcoroutines.models.database
 
-import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
+import uz.orifjon.wallpaperappcoroutines.models.Src
 
 @Entity
 data class Photo(
