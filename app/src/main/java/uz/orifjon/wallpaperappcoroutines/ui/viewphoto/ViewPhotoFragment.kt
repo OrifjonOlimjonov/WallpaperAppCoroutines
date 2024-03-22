@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +31,9 @@ import uz.orifjon.wallpaperappcoroutines.blurlayout.BlurLayout
 import uz.orifjon.wallpaperappcoroutines.databinding.CustomDialogBinding
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentViewPhotoBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
+import uz.orifjon.wallpaperappcoroutines.models.PhotoDatabase
+import uz.orifjon.wallpaperappcoroutines.retrofit.ApiClient
+import uz.orifjon.wallpaperappcoroutines.retrofit.ApiService
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -75,42 +77,52 @@ class ViewPhotoFragment : Fragment() {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.one(context, bitmap))
                             }
+
                             1 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.two(context, bitmap))
                             }
+
                             2 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.three(context, bitmap))
                             }
+
                             3 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.four(context, bitmap))
                             }
+
                             4 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.five(context, bitmap))
                             }
+
                             5 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.six(context, bitmap))
                             }
+
                             6 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.seven(context, bitmap))
                             }
+
                             7 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.eight(context, bitmap))
                             }
+
                             8 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.nine(context, bitmap))
                             }
+
                             9 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(photoFilter.ten(context, bitmap))
                             }
+
                             10 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(
@@ -120,6 +132,7 @@ class ViewPhotoFragment : Fragment() {
                                     )
                                 )
                             }
+
                             11 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(
@@ -129,6 +142,7 @@ class ViewPhotoFragment : Fragment() {
                                     )
                                 )
                             }
+
                             12 -> {
                                 binding.imageView.setImageBitmap(originalImage)
                                 binding.imageView.setImageBitmap(
@@ -359,8 +373,11 @@ class ViewPhotoFragment : Fragment() {
 
 
         binding.btnLike.setOnClickListener { view ->
-            var k = true
-            var index = -1
+            if (PhotoDatabase.getDatabase(requireContext()).photoDao().getImage(photo.id) == null) {
+                PhotoDatabase.getDatabase(requireContext()).photoDao().add(photo)
+            } else{
+                PhotoDatabase.getDatabase(requireContext()).photoDao().delete(photo)
+            }
 //            if (list.get(i).isLike()) {
 //                binding.btnLike.setBackgroundResource(R.drawable.dislike)
 //            } else {
@@ -437,11 +454,12 @@ class ViewPhotoFragment : Fragment() {
                 )
             }
 
-        } catch (e:Exception){
+        } catch (e: Exception) {
             Log.d("TAG", "saveImage: $e")
         }
         return uri
     }
+
     private fun saveToStorage() {
         var contentResolver = requireActivity().contentResolver
         val images = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

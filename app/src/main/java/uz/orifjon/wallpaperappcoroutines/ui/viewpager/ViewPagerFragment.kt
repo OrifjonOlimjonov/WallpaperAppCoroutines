@@ -38,7 +38,7 @@ class ViewPagerFragment : Fragment() ,CoroutineScope{
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentViewPagerBinding.inflate(inflater, container, false)
 
         viewPagerViewModelFactory = ViewPagerViewModelFactory(param1!!)

@@ -1,32 +1,20 @@
 package uz.orifjon.wallpaperappcoroutines.ui.random
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import uz.orifjon.wallpaperappcoroutines.R
-import uz.orifjon.wallpaperappcoroutines.adapters.AdapterRecyclerView
 import uz.orifjon.wallpaperappcoroutines.adapters.PhotoPaging3Adapter
 import uz.orifjon.wallpaperappcoroutines.databinding.FragmentRandomBinding
 import uz.orifjon.wallpaperappcoroutines.models.Photo
-import uz.orifjon.wallpaperappcoroutines.models.PhotosApi
-import uz.orifjon.wallpaperappcoroutines.retrofit.ApiClient
-import uz.orifjon.wallpaperappcoroutines.retrofit.ApiService
 import kotlin.coroutines.CoroutineContext
 
 class RandomFragment : Fragment(), CoroutineScope {

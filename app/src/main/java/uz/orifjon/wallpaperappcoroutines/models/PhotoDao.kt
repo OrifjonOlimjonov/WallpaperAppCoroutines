@@ -7,15 +7,18 @@ interface PhotoDao {
 
 
     @Insert
-    fun add(photo: PhotoSave)
+    fun add(photo: Photo)
 
     @Update
-    fun update(photo: PhotoSave)
+    fun update(photo: Photo)
 
     @Delete
-    fun delete(photo: PhotoSave)
+    fun delete(photo: Photo)
 
-    @Query("SELECT * FROM photo_save")
-    fun list():List<PhotoSave>
+    @Query("SELECT * FROM Photo where id = :id")
+    fun getImage(id:Int):Photo?
+
+    @Query("SELECT * FROM Photo")
+    fun list():List<Photo>
 
 }

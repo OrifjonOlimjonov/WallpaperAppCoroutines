@@ -24,7 +24,6 @@ class AdapterRecyclerView(var context: Context, var resources: Resources, var ph
 
     inner class VH(var binding: ItemRvBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(position: Int) {
-
             val photoFilter = PhotoFilter()
             Picasso.get().load(photo.src.small).into(binding.imgRV, object : Callback {
                 override fun onSuccess() {

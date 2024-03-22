@@ -11,7 +11,7 @@ class ViewPager2Adapter(lifecycle: Lifecycle,fragment: FragmentManager,var list:
     override fun getItemCount(): Int = list.size
 
     override fun createFragment(position: Int): Fragment {
-                return ViewPagerFragment.newInstance(list[position],list[position])
+        return ViewPagerFragment.newInstance(list[position],list[position])
     }
 
 
